@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { Box, Text, Button, VStack, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Input } from '@chakra-ui/react';
 import { FaPlus } from 'react-icons/fa';
 
 const Index = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [activities, setActivities] = useState([]);
 
   return (
     <VStack spacing={4} align="stretch">
@@ -13,7 +15,9 @@ const Index = () => {
         <Text fontSize="lg">Display health score here</Text>
       </Box>
       <Box p={5} shadow="md" borderWidth="1px">
-        <Text fontSize="lg">Latest activities or "Add your first activity"</Text>
+        <Text fontSize="lg">{activities.length > 0 ? activities.map((activity, index) => (
+          <Text key={index}>{activity}</Text>
+        )) : "Add your first activity"}</Text>
       </Box>
       <Button position="fixed" bottom="20" right="5" colorScheme="teal" variant="solid" onClick={onOpen}>
         <FaPlus /> Add
@@ -24,7 +28,15 @@ const Index = () => {
           <ModalHeader>Add a new activity</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Input placeholder="Type your activity here..." />
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              const activity = e.target.elements.activity.value;
+              setActivities([activity, ...activities]);
+              onClose();
+            }}>
+              <Input name="activity" placeholder="Type your activity here..." />
+              <Button type="submit" colorScheme="teal" mt={4}>Add Activity</Button>
+            </form>
           </ModalBody>
         </ModalContent>
       </Modal>
