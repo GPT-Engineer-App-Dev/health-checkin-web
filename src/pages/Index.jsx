@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Text, Button, VStack, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Input } from '@chakra-ui/react';
+import { Flex, Box, Text, Button, VStack, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Input } from '@chakra-ui/react';
 import { FaPlus } from 'react-icons/fa';
 
 const Index = () => {
