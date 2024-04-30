@@ -8,17 +8,17 @@ const Index = () => {
 
   return (
     <VStack spacing={4} align="stretch" bgGradient="linear(to-r, brand.900, brand.800)">
-      <Box p={5} shadow="md" borderWidth="0px">
+      <Box p={5} borderWidth="0px">
         <Text fontSize="2xl" textAlign="center">Your Score</Text>
       </Box>
-      <Box p={5} shadow="md" borderWidth="0px">
+      <Box p={5} borderWidth="0px">
         <Text fontSize="3xl" textAlign="center" mt={10} mb={10}>50</Text>
       </Box>
       <Text fontSize="xl" fontWeight="bold" mb={2}>Latest Activities</Text>
-      <Box p={5} shadow="md" borderWidth="0px">
+      <Box p={5} borderWidth="0px">
         <VStack>
           {activities.length > 0 ? activities.map((activity, index) => (
-            <Box key={index} p={4} shadow="md" w="full" mx={4}>
+            <Box key={index} p={4} w="full" mx={4}>
               <Text fontSize="lg">{activity.name}</Text>
               <Text fontSize="xs" color="gray.500">{new Date(activity.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}</Text>
             </Box>
