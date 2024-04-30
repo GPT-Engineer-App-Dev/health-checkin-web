@@ -4,7 +4,7 @@ import { FaPlus } from 'react-icons/fa';
 
 const Index = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState([{ name: "Morning Run", date: "2023-05-31" }]);
 
   return (
     <VStack spacing={4} align="stretch">
@@ -16,9 +16,14 @@ const Index = () => {
       </Box>
       <Text fontSize="xl" fontWeight="bold" mb={2}>Latest Activities</Text>
       <Box p={5} shadow="md" borderWidth="1px">
-        <Text fontSize="lg">{activities.length > 0 ? activities.map((activity, index) => (
-          <Text key={index}>{activity}</Text>
-        )) : "Add your first activity"}</Text>
+        <VStack>
+          {activities.length > 0 ? activities.map((activity, index) => (
+            <Box key={index} p={4} shadow="md" borderWidth="1px" borderRadius="lg">
+              <Text fontSize="lg">{activity.name}</Text>
+              <Text fontSize="xs" color="gray.500">{new Date(activity.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}</Text>
+            </Box>
+          )) : <Text>Add your first activity</Text>}
+        </VStack>
       </Box>
       <Button position="fixed" bottom="20" right="5" colorScheme="teal" variant="solid" onClick={onOpen}>
         <FaPlus /> Add
