@@ -18,7 +18,7 @@ const Index = () => {
       <Box p={5} shadow="md" borderWidth="1px">
         <VStack>
           {activities.length > 0 ? activities.map((activity, index) => (
-            <Box key={index} p={4} shadow="md" borderWidth="1px" borderRadius="lg">
+            <Box key={index} p={4} shadow="md" w="full" mx={4}>
               <Text fontSize="lg">{activity.name}</Text>
               <Text fontSize="xs" color="gray.500">{new Date(activity.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}</Text>
             </Box>
