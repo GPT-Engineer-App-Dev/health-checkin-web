@@ -1,10 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { client } from 'lib/crud';
 import { Box, Text, Button, VStack, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Input } from '@chakra-ui/react';
 import { FaPlus } from 'react-icons/fa';
 
 const Index = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [activities, setActivities] = useState([]);
+  useEffect(() => {
+    const fetchActivities = async () => {
+      const fetchedActivities = await client.getWithPrefix('activity:');
+      if (fetchedActivities) {
+        setActivities(fetchedActivities.map(item => item.value.text));
+      }
+    };
+    fetchActivities();
+  }, []);
 
   return (
     <VStack spacing={4} align="stretch">
@@ -28,10 +38,16 @@ const Index = () => {
           <ModalHeader>Add a new activity</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <form onSubmit={(e) => {
+            <form onSubmit={async (e) => {
               e.preventDefault();
-              const activity = e.target.elements.activity.value;
-              setActivities([activity, ...activities]);
+              const activityInput = e.target.elements.activity.value;
+              if (activityInput) {
+                const success = await client.set(`activity:${new Date().toISOString()}`, { text: activityInput });
+                if (success) {
+                  const updatedActivities = await client.getWithPrefix('activity:');
+                  setActivities(updatedActivities.map(item => item.value.text));
+                }
+              }
               onClose();
             }}>
               <Input name="activity" placeholder="Type your activity here..." />
