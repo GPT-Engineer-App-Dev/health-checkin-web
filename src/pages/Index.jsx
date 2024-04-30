@@ -14,6 +14,7 @@ const Index = () => {
       <Box p={5} shadow="md" borderWidth="1px">
         <Text fontSize="lg">Display health score here</Text>
       </Box>
+      <Text fontSize="xl" fontWeight="bold" mb={2}>Latest Activities</Text>
       <Box p={5} shadow="md" borderWidth="1px">
         <Text fontSize="lg">{activities.length > 0 ? activities.map((activity, index) => (
           <Text key={index}>{activity}</Text>
@@ -35,7 +36,9 @@ const Index = () => {
               onClose();
             }}>
               <Input name="activity" placeholder="Type your activity here..." />
-              <Button type="submit" colorScheme="teal" mt={4}>Add Activity</Button>
+              <Flex justifyContent="flex-end">
+                <Button type="submit" colorScheme="teal" mt={4}>Add</Button>
+              </Flex>
             </form>
           </ModalBody>
         </ModalContent>
