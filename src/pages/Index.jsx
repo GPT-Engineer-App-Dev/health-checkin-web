@@ -12,7 +12,7 @@ const Index = () => {
         <Text fontSize="2xl" textAlign="center">Your Score</Text>
       </Box>
       <Box p={5} shadow="md" borderWidth="1px">
-        <Text fontSize="lg">Display health score here</Text>
+        <Text fontSize="3xl" textAlign="center" mt={10} mb={10}>50</Text>
       </Box>
       <Text fontSize="xl" fontWeight="bold" mb={2}>Latest Activities</Text>
       <Box p={5} shadow="md" borderWidth="1px">
